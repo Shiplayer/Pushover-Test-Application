@@ -1,8 +1,7 @@
 package com.developer.ship.pushovertestapplication
 
-import com.google.gson.JsonObject
+import com.developer.ship.pushovertestapplication.entity.PushoverResponse
 import io.reactivex.Single
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -34,5 +33,5 @@ interface PushoverAPI {
             @Field("token") token:String = tokenApi,
             @Field("user") userToken:String,
             @Field("message") message:String
-    ) : Single<Response<JsonObject>>
+    ) : Single<PushoverResponse>
 }
