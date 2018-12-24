@@ -48,8 +48,8 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/rv_messages" tools:listitem="@layout/item_rv"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
