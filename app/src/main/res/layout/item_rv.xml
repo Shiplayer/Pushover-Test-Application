@@ -18,7 +18,7 @@
                     android:layout_height="wrap_content" android:background="@drawable/title_background">
 
                 <TextView
-                        android:text="TextView"
+                        android:text="@string/item_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" android:id="@+id/tv_title"
                         app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
@@ -28,7 +28,7 @@
                         android:textSize="18sp" android:layout_marginStart="8dp"
                         android:textColor="@android:color/white"/>
                 <TextView
-                        android:text="TextView"
+                        android:text="@string/date_example"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/tv_date"
                         app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
@@ -36,7 +36,7 @@
                         android:textSize="12sp" android:textColor="@android:color/white"/>
             </android.support.constraint.ConstraintLayout>
             <TextView
-                    android:text="TextView"
+                    android:text="@string/content_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/tv_content"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"

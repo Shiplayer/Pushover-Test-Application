@@ -30,10 +30,12 @@ class MessageAdapter : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         private val text = view.findViewById<TextView>(R.id.tv_content)
         private val date = view.findViewById<TextView>(R.id.tv_date)
+        private val title = view.findViewById<TextView>(R.id.tv_title)
 
         fun init(message: PushoverMessage){
             text.text = message.message
-            date.text = SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(message.date)
+            date.text = SimpleDateFormat("HH:mm:ss dd.MM.yyyy").format(message.date)
+            title.text = message.title ?: "No title"
         }
     }
 }

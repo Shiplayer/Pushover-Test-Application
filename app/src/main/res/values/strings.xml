@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Pushover Test Application</string>
+    <string name="title_message">Title message</string>
+    <string name="send">Send</string>
+    <string name="message">Message</string>
+    <string name="user_token">User token</string>
+    <string name="content_message">Content message</string>
+    <string name="date_example">00:00:00 27.12.2018</string>
+    <string name="item_title">Title</string>
+    <string-array name="deferred_message_time">
+        <item>deferred message is off</item>
+        <item>deferred message after 5 minutes</item>
+        <item>deferred message after 10 minutes</item>
+        <item>deferred message after 15 minutes</item>
+        <item>deferred message after 20 minutes</item>
+        <item>deferred message after 30 minutes</item>
+    </string-array>
 </resources>

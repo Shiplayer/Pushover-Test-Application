@@ -34,7 +34,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:hint="user token"
+                            android:hint="@string/user_token"
                             android:inputType="textPersonName"
                     />
                 </android.support.design.widget.TextInputLayout>
@@ -53,7 +53,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:hint="simple text"
+                            android:hint="@string/message"
                             android:inputType="textPersonName"/>
                 </android.support.design.widget.TextInputLayout>
 
@@ -65,7 +65,7 @@
                         android:layout_marginEnd="8dp"
                         android:minWidth="0dp"
                         android:minHeight="0dp"
-                        android:text="Send"
+                        android:text="@string/send"
                         android:textAllCaps="false"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="@+id/hint_title_message"
@@ -87,7 +87,7 @@
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:inputType="textPersonName"
-                            android:hint="title message"/>
+                            android:hint="@string/title_message"/>
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.constraint.Barrier
