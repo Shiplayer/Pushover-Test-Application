@@ -1,9 +1,9 @@
 package com.developer.ship.pushovertestapplication
 
 import com.developer.ship.pushovertestapplication.entity.PushoverResponse
-import io.reactivex.Single
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -20,7 +20,7 @@ interface PushoverAPI {
             val retrofit = Retrofit.Builder()
                 .baseUrl(baseURL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()
 
             retrofit.create(PushoverAPI::class.java)
@@ -32,6 +32,7 @@ interface PushoverAPI {
     fun sendMessage(
             @Field("token") token:String = tokenApi,
             @Field("user") userToken:String,
-            @Field("message") message:String
-    ) : Single<PushoverResponse>
+            @Field("message") message:String,
+            @Field("title") title:String?
+    ) : Deferred<PushoverResponse>
 }

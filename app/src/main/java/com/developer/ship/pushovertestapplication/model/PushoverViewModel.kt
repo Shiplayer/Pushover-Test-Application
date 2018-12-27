@@ -6,10 +6,8 @@ import android.arch.lifecycle.AndroidViewModel
 import android.util.Log
 import com.developer.ship.pushovertestapplication.PushoverAPI
 import com.developer.ship.pushovertestapplication.entity.PushoverMessage
-import com.developer.ship.pushovertestapplication.entity.PushoverResponse
 import com.developer.ship.pushovertestapplication.repository.MessageRepository
 import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -21,39 +19,32 @@ import kotlin.coroutines.CoroutineContext
 class PushoverViewModel(app:Application) : AndroidViewModel(app), CoroutineScope{
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO + Job()
-    private val messageSubject = PublishSubject.create<PushoverMessage>()
-    private lateinit var messageObservable: Observable<PushoverMessage>
-    private val responseSubject = PublishSubject.create<PushoverResponse>()
     private val repository = MessageRepository(app)
-    private val disposable = CompositeDisposable()
-    private val allMessages = repository
+    private val errorPublisher = PublishSubject.create<String>()
 
 
     @SuppressLint("CheckResult")
     public fun pushMessage(message: PushoverMessage){
         val errorHandler = CoroutineExceptionHandler{_, exception ->
             launch {
-                Log.i("PushoverViewModel", exception.message)
+                errorPublisher.onNext(exception.message!!)
+                //Log.i("PushoverViewModel", exception.message)
             }
         }
         launch(errorHandler) {
-            val response = PushoverAPI.instance.sendMessage(userToken = message.userToken, message = message.message).await()
-            if(response.status == 1)
+            val response = PushoverAPI.instance.sendMessage(
+                userToken = message.userToken,
+                message = message.message,
+                title = message.title
+            ).await()
+            Log.i("PushoverViewModel", response.status.toString())
+            if(response.status == 1) {
                 repository.insert(message)
+            }
         }
-        /*Single.just(message).subscribeOn(Schedulers.io())
-            .subscribe({m ->
-                PushoverAPI.instance.sendMessage(userToken = m.userToken, message = m.message).subscribe ({ response ->
-                    Log.i("PushoverViewModel", response.toString())
-                    responseSubject.onNext(response)
-                }, {error ->
-                    Log.i("PushoverViewModel", error.message)
-                })
-            }, {error ->
-                error.printStackTrace()
-            })
-        messageSubject.onNext(message)*/
     }
+
+    fun getErrorObservanle() : Observable<String> = errorPublisher
 
     override fun onCleared() {
         super.onCleared()
@@ -61,7 +52,8 @@ class PushoverViewModel(app:Application) : AndroidViewModel(app), CoroutineScope
     }
 
     fun getListMessages() : Observable<List<PushoverMessage>>{
-        return repository.getAllMessages()
+
+        return repository.getAllMessages().cache()
     }
 
 }
